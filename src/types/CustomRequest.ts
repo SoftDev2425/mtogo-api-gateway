@@ -1,4 +1,5 @@
 import { Request } from 'express';
+import { Session } from 'express-session';
 
 interface UserSession {
   user?: {
@@ -8,7 +9,5 @@ interface UserSession {
 }
 
 export interface CustomRequest extends Request {
-  session: UserSession & {
-    destroy: (cb: (err: Error) => void) => void;
-  };
+  session: Session & UserSession;
 }
