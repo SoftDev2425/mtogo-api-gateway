@@ -15,7 +15,6 @@
     "paths": {
       "@/*": ["src/*"] // absolute paths
     },
-
     "strictNullChecks": true, // Enable strict null checks
     "strictFunctionTypes": true, // Enable strict checking of function types
     "strictPropertyInitialization": true, // Ensure non-undefined class properties are initialized in the constructor
@@ -31,7 +30,8 @@
     "noFallthroughCasesInSwitch": true // Report errors for fallthrough cases in switch statement
   },
   "include": [
-    "src/**/*" // Include all files in the src directory
+    "src/**/*", // Include all files in the src directory
+    "src/types"
   ],
   "exclude": [
     "node_modules", // Exclude the node_modules directory
