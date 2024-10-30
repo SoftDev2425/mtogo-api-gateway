@@ -1,4 +1,4 @@
-import { CustomRequest } from '@/types/CustomRequest';
+import { CustomRequest } from '../types/CustomRequest';
 import { Response, NextFunction } from 'express';
 
 function authenticateSession(

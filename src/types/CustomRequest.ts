@@ -3,6 +3,7 @@ import { Session } from 'express-session';
 
 interface UserSession {
   user?: {
+    id: string;
     email: string;
     role: string;
   };

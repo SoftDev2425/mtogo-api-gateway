@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "Restaurant" ADD COLUMN     "role" TEXT NOT NULL DEFAULT 'RESTAURANT';
+
+-- AlterTable
+ALTER TABLE "User" ADD COLUMN     "role" TEXT NOT NULL DEFAULT 'USER';
