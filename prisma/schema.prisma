@@ -15,7 +15,7 @@ datasource db {
 
 // users (customer) model
 
-model User {
+model Users {
   id        String   @id @default(cuid())
   firstName String   @db.VarChar(255)
   lastName  String   @db.VarChar(255)
@@ -28,7 +28,7 @@ model User {
 }
 
 // restaurant model
-model Restaurant {
+model Restaurants {
   id        String   @id @default(cuid())
   name      String   @db.VarChar(255)
   email     String   @unique @db.VarChar(255)

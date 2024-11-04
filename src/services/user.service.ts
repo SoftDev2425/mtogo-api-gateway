@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 
 export async function registerUser(data: RegisterUserInput) {
   // check if user with email already exists
-  const userExists = await prisma.user.findUnique({
+  const userExists = await prisma.users.findUnique({
     where: {
       email: data.email,
     },
@@ -14,7 +14,7 @@ export async function registerUser(data: RegisterUserInput) {
     throw new Error('User with email already exists');
   }
 
-  const user = await prisma.user.create({
+  const user = await prisma.users.create({
     data: {
       firstName: data.firstName,
       lastName: data.lastName,

@@ -11,7 +11,7 @@ async function login(
   rememberMe: boolean,
   res: Response,
 ) {
-  const user = await prisma.user.findUnique({
+  const user = await prisma.users.findUnique({
     where: {
       email,
     },
