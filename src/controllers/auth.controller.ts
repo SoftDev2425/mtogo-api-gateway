@@ -19,7 +19,7 @@ async function handleLoginUser(req: CustomRequest, res: Response) {
 
     loginSchema.parse({ email, password });
 
-    await login(email, password, rememberMe ? false : true, res);
+    await login(email, password, rememberMe ? true : false, res);
   } catch (error) {
     // type guard to narrow the type of `error`
     if (error instanceof ZodError) {
