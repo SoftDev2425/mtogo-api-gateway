@@ -1,5 +1,7 @@
 {
   "yaml.schemas": {
-    "https://www.artillery.io/schema.json": []
+    "https://www.artillery.io/schema.json": [
+      "file:///Users/owaisdashti/Desktop/service_tests/mtogo-api-gateway/src/tests/load/sample-load-test.yml"
+    ]
   }
 }
