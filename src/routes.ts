@@ -3,20 +3,26 @@ import proxy from 'express-http-proxy';
 import { logger } from './utils/logger';
 
 function routes(app: Express) {
-  const authSerivceUrl =
+  const authServiceURL =
     process.env.AUTH_SERVICE_URL || 'http://localhost:3001';
 
   app.get('/', (_req: Request, res: Response) =>
     res.send(`Hello from MTOGO: API GATEWAY!`),
   );
 
-  app.get('/healthcheck', (_req: Request, res: Response) =>
-    res.sendStatus(200),
-  );
+  app.get('/healthcheck', async (_req: Request, res: Response) => {
+    await fetch('http://localhost:3001/healthcheck').then(response => {
+      if (response.status !== 200) {
+        res.status(500).send('Auth service is down');
+      }
+    });
+
+    res.sendStatus(200);
+  });
 
   app.use(
     '/api/auth',
-    proxy(authSerivceUrl, {
+    proxy(authServiceURL, {
       proxyReqPathResolver: req => `/api/auth${req.url}`,
     }),
   );
