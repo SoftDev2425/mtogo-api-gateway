@@ -1,16 +1,10 @@
 import { Express, NextFunction, Request, Response } from 'express';
 import proxy from 'express-http-proxy';
 import { logger } from './utils/logger';
-import AuthRouter from './routes/auth.routes';
-import { authenticateSession } from './middleware/authenticateSession';
 
 function routes(app: Express) {
-  const basketServiceUrl =
-    process.env.BASKET_SERVICE_URL || 'http://localhost:3001';
-  const orderServiceUrl =
-    process.env.ORDER_SERVICE_URL || 'http://localhost:3002';
-
-  console.log(basketServiceUrl, orderServiceUrl);
+  const authSerivceUrl =
+    process.env.AUTH_SERVICE_URL || 'http://localhost:3001';
 
   app.get('/', (_req: Request, res: Response) =>
     res.send(`Hello from MTOGO: API GATEWAY!`),
@@ -20,13 +14,10 @@ function routes(app: Express) {
     res.sendStatus(200),
   );
 
-  app.use('/api/auth', AuthRouter);
-
   app.use(
-    '/api/basket',
-    authenticateSession,
-    proxy(basketServiceUrl, {
-      proxyReqPathResolver: req => `/api/basket${req.url}`,
+    '/api/auth',
+    proxy(authSerivceUrl, {
+      proxyReqPathResolver: req => `/api/auth${req.url}`,
     }),
   );
 

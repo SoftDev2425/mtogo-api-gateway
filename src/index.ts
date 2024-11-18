@@ -1,6 +1,5 @@
 import dotenv from 'dotenv';
 import createServer from './utils/server';
-import { redisClient } from './redis/client';
 
 dotenv.config();
 
@@ -14,12 +13,7 @@ async function main() {
 }
 
 main()
-  .then(async () => {
-    await redisClient.connect();
-    redisClient.on('error', () =>
-      console.log('Connection to redis server failed'),
-    );
-  })
+  .then(async () => {})
   .catch(async e => {
     console.error(e);
     process.exit(1);
