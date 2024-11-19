@@ -1,10 +1,14 @@
 import { Express, NextFunction, Request, Response } from 'express';
 import proxy from 'express-http-proxy';
 import { logger } from './utils/logger';
+import { validateSession } from './middleware/validateSession';
 
 function routes(app: Express) {
   const authServiceURL =
     process.env.AUTH_SERVICE_URL || 'http://localhost:3001';
+
+  const restaurantServiceURL =
+    process.env.RESTAURANT_SERVICE_URL || 'http://localhost:3002';
 
   app.get('/', (_req: Request, res: Response) =>
     res.send(`Hello from MTOGO: API GATEWAY!`),
@@ -24,6 +28,14 @@ function routes(app: Express) {
     '/api/auth',
     proxy(authServiceURL, {
       proxyReqPathResolver: req => `/api/auth${req.url}`,
+    }),
+  );
+
+  app.use(
+    '/api/restaurants',
+    validateSession,
+    proxy(restaurantServiceURL, {
+      proxyReqPathResolver: req => `/api/restaurants${req.url}`,
     }),
   );
 
