@@ -15,12 +15,6 @@ function routes(app: Express) {
   );
 
   app.get('/healthcheck', async (_req: Request, res: Response) => {
-    await fetch('http://localhost:3001/healthcheck').then(response => {
-      if (response.status !== 200) {
-        res.status(500).send('Auth service is down');
-      }
-    });
-
     res.sendStatus(200);
   });
 
