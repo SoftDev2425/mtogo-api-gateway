@@ -1,9 +1,8 @@
-import { Response, NextFunction } from 'express';
-import { CustomRequest } from '../types/CustomRequest';
+import { Request, Response, NextFunction } from 'express';
 import { parse } from 'cookie';
 
 export const validateSession = async (
-  req: CustomRequest,
+  req: Request,
   res: Response,
   next: NextFunction,
 ) => {
@@ -19,7 +18,7 @@ export const validateSession = async (
     }
 
     const authResponse = await fetch(
-      `${process.env.AUTH_SERVICE_URL}/validate`,
+      `${process.env.AUTH_SERVICE_URL}/api/auth/validate`,
       {
         method: 'POST',
         headers: {

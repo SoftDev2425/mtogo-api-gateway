@@ -24,11 +24,12 @@
 
     "noUnusedLocals": true, // Report errors on unused locals
     "noUnusedParameters": true, // Report errors on unused parameters
-    "noFallthroughCasesInSwitch": true // Report errors for fallthrough cases in switch statement
+    "noFallthroughCasesInSwitch": true, // Report errors for fallthrough cases in switch statement
+    "typeRoots": ["./types"] // Specify the location where type definitions are found
   },
+
   "include": [
-    "src/**/*", // Include all files in the src directory
-    "src/types"
+    "src/**/*" // Include all files in the src directory
   ],
   "exclude": [
     "node_modules", // Exclude the node_modules directory

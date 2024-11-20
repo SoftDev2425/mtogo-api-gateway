@@ -36,6 +36,15 @@ function routes(app: Express) {
     validateSession,
     proxy(restaurantServiceURL, {
       proxyReqPathResolver: req => `/api/restaurants${req.url}`,
+      proxyReqOptDecorator: (proxyReqOpts, srcReq) => {
+        proxyReqOpts.headers = {
+          ...proxyReqOpts.headers,
+          'x-user-role': srcReq.role,
+          'x-user-id': srcReq.userId,
+          'x-user-email': srcReq.email,
+        };
+        return proxyReqOpts;
+      },
     }),
   );
 
