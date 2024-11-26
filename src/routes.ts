@@ -10,6 +10,9 @@ function routes(app: Express) {
   const restaurantServiceURL =
     process.env.RESTAURANT_SERVICE_URL || 'http://localhost:3002';
 
+  const orderServiceURL =
+    process.env.ORDER_SERVICE_URL || 'http://localhost:3003';
+
   app.get('/', (_req: Request, res: Response) =>
     res.send(`Hello from MTOGO: API GATEWAY!`),
   );
@@ -33,9 +36,43 @@ function routes(app: Express) {
       proxyReqOptDecorator: (proxyReqOpts, srcReq) => {
         proxyReqOpts.headers = {
           ...proxyReqOpts.headers,
-          'x-user-role': srcReq.role,
-          'x-user-id': srcReq.userId,
-          'x-user-email': srcReq.email,
+          'x-user-role': srcReq.role || '',
+          'x-user-id': srcReq.userId || '',
+          'x-user-email': srcReq.email || '',
+        };
+        return proxyReqOpts;
+      },
+    }),
+  );
+
+  app.use(
+    '/api/basket',
+    validateSession,
+    proxy(restaurantServiceURL, {
+      proxyReqPathResolver: req => `/api/basket${req.url}`,
+      proxyReqOptDecorator: (proxyReqOpts, srcReq) => {
+        proxyReqOpts.headers = {
+          ...proxyReqOpts.headers,
+          'x-user-role': srcReq.role || '',
+          'x-user-id': srcReq.userId || '',
+          'x-user-email': srcReq.email || '',
+        };
+        return proxyReqOpts;
+      },
+    }),
+  );
+
+  app.use(
+    '/api/orders',
+    validateSession,
+    proxy(orderServiceURL, {
+      proxyReqPathResolver: req => `/api/orders${req.url}`,
+      proxyReqOptDecorator: (proxyReqOpts, srcReq) => {
+        proxyReqOpts.headers = {
+          ...proxyReqOpts.headers,
+          'x-user-role': srcReq.role || '',
+          'x-user-id': srcReq.userId || '',
+          'x-user-email': srcReq.email || '',
         };
         return proxyReqOpts;
       },
