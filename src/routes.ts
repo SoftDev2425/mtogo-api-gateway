@@ -90,14 +90,17 @@ function routes(app: Express) {
         ip,
         stack: err.stack,
       });
-      res.status(500).send('Internal Server Error');
+      res.status(500).send({
+        error: 'An error occurred in the API Gateway',
+        message: err
+      });
     } else {
-      logger.error('An unknown error occurred', {
+      logger.error('An unknown error occurred in the API Gateway', {
         method,
         url: originalUrl,
         ip,
       });
-      res.status(500).send('An unknown error occurred');
+      res.status(500).send('An unknown error occurred in the API Gateway');
     }
   });
 
