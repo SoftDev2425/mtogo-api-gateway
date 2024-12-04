@@ -786,12 +786,12 @@ paths:
               properties:
                 email:
                   type: string
-                  example: "admin@company.com"
-                  description: "The email address of the management user."
+                  example: 'admin@company.com'
+                  description: 'The email address of the management user.'
                 password:
                   type: string
-                  example: "SecurePassword123!"
-                  description: "The password for the management user."
+                  example: 'SecurePassword123!'
+                  description: 'The password for the management user.'
       responses:
         '200':
           description: Login successful. Session established.
@@ -802,11 +802,11 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: "Login successful!"
+                    example: 'Login successful!'
                   session:
                     type: string
-                    example: "sessionToken123456"
-                    description: "Session token returned upon successful login."
+                    example: 'sessionToken123456'
+                    description: 'Session token returned upon successful login.'
         '401':
           description: Unauthorized. Invalid credentials or missing fields.
           content:
@@ -816,7 +816,7 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: "Invalid credentials"
+                    example: 'Invalid credentials'
         '500':
           description: Internal server error.
           content:
@@ -826,7 +826,7 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: "Internal server error. Please try again later."
+                    example: 'Internal server error. Please try again later.'
 
   # CUSTOMERS
   /api/auth/register/customer:
