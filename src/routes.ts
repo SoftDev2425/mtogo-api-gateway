@@ -79,6 +79,23 @@ function routes(app: Express) {
     }),
   );
 
+  app.use(
+    '/api/search',
+    validateSession,
+    proxy(restaurantServiceURL, {
+      proxyReqPathResolver: req => `/api/search${req.url}`,
+      proxyReqOptDecorator: (proxyReqOpts, srcReq) => {
+        proxyReqOpts.headers = {
+          ...proxyReqOpts.headers,
+          'x-user-role': srcReq.role || '',
+          'x-user-id': srcReq.userId || '',
+          'x-user-email': srcReq.email || '',
+        };
+        return proxyReqOpts;
+      },
+    }),
+  );
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   app.use((err: unknown, req: Request, res: Response, _next: NextFunction) => {
     const { method, originalUrl, ip } = req;

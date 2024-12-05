@@ -249,6 +249,7 @@ paths:
     get:
       tags:
         - Restaurants
+        - Customers
       summary: Get categories and menus by restaurant ID
       description: Retrieves all categories and their associated menus for a specific restaurant.
       parameters:
@@ -310,7 +311,29 @@ paths:
         '500':
           description: Internal server error.
 
-    /api/restaurants/categories/{categoryId}:
+  /api/restaurants/categories/{categoryId}:
+    get:
+      tags:
+        - Restaurants
+        - Customers
+      summary: Get a category by ID
+      parameters:
+        - name: categoryId
+          in: path
+          required: true
+          description: The ID of the category to retrieve.
+          schema:
+            type: string
+            example: cm3ppktcq0000q2of4xesxez5
+      responses:
+        '200':
+          description: Category retrieved successfully
+        '400':
+          description: Invalid input data.
+        '404':
+          description: Category not found.
+        '500':
+          description: Internal server error.
     put:
       tags:
         - Restaurants
@@ -392,8 +415,6 @@ paths:
                     example: Category not found.
         '500':
           description: Internal server error.
-
-  /api/restaurants/categories/{categoryId}:
     delete:
       tags:
         - Restaurants
@@ -431,56 +452,47 @@ paths:
         '500':
           description: Internal server error.
 
-  /api/restaurant/categories/{restaurantId}:
+  /api/restaurant/categories/{categoryId}:
     get:
       tags:
         - Restaurants
-      summary: Get categories by restaurant ID
-      description: Retrieves all categories associated with a specific restaurant ID.
+        - Customers
+      summary: Get category by category id
+      description: Retrieves a category associated with a specific category ID.
       parameters:
-        - name: restaurantId
+        - name: categoryId
           in: path
           required: true
-          description: The ID of the restaurant to retrieve categories for.
+          description: The ID of the category to retrieve.
           schema:
             type: string
             example: cm3lfig8f0002oqa5omw3mw84
       responses:
         '200':
-          description: A list of categories for the specified restaurant.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    id:
-                      type: string
-                      example: cm4a1ufrx000113rx8gfp6qo4
-                    title:
-                      type: string
-                      example: Pizzas
-                    sortOrder:
-                      type: integer
-                      example: 1
-                    description:
-                      type: string
-                      example: ''
-                    createdAt:
-                      type: string
-                      format: date-time
-                      example: '2024-12-04T15:41:39.450Z'
-        '404':
-          description: Restaurant not found or no categories available.
+          description: A category for the specified restaurant.
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  message:
+                  id:
                     type: string
-                    example: Restaurant not found or no categories available.
+                    example: cm4a1ufrx000113rx8gfp6qo4
+                  title:
+                    type: string
+                    example: Pizzas
+                  sortOrder:
+                    type: integer
+                    example: 1
+                  description:
+                    type: string
+                    example: ''
+                  createdAt:
+                    type: string
+                    format: date-time
+                    example: '2024-12-04T15:41:39.450Z'
+        '404':
+          description: Category not found.
         '500':
           description: Internal server error.
 
@@ -488,6 +500,7 @@ paths:
     get:
       tags:
         - Restaurants
+        - Customers
       summary: Get menus by category ID
       description: Retrieves all menus associated with a specific category ID.
       parameters:
@@ -539,6 +552,28 @@ paths:
           description: Internal server error.
 
   /api/restaurants/menus/{menuId}:
+    get:
+      tags:
+        - Restaurants
+        - Customers
+      summary: Get a menu by menu ID
+      parameters:
+        - name: menuId
+          in: path
+          required: true
+          description: The ID of the menu to retrieve.
+          schema:
+            type: string
+            example: cm3mtqlck000012i4gtvpqvwn
+      responses:
+        '200':
+          description: Menu retrieved successfully
+        '400':
+          description: Invalid input data.
+        '404':
+          description: Menu not found.
+        '500':
+          description: Internal server error.
     put:
       tags:
         - Restaurants
@@ -936,7 +971,7 @@ paths:
                 email:
                   type: string
                   format: email
-                  example: 'owais@gmail.com'
+                  example: 'arf@gmail.com'
                   description: The email address of the customer.
                 password:
                   type: string
@@ -1212,22 +1247,20 @@ paths:
         '500':
           description: Internal server error.
 
+  /api/basket/{id}/clear:
     delete:
       tags:
         - Customers
       summary: Clear the customer's basket
       description: Allows a customer to remove all items from their basket for a specific restaurant.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                restaurantId:
-                  type: string
-                  example: cm3vqicwm000134choat5sho7
-                  description: The ID of the restaurant associated with the basket.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the basket.
+          schema:
+            type: string
+            example: cm3vqicwm000134choat5sho7
       responses:
         '200':
           description: Basket cleared successfully.
