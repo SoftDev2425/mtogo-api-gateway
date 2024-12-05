@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
-  title: Restaurant API
-  description: API for managing restaurants, customers, and management operations on the MTOGO platform. Made by Andreas and Owais.
+  title: MTOGO API Endpoints
+  description: API through the gateway for managing restaurants, customers, and management operations on the MTOGO platform. Made by Andreas and Owais.
   version: 1.0.0
 servers:
   - url: http://localhost:3000
