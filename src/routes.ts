@@ -92,7 +92,7 @@ function routes(app: Express) {
       });
       res.status(500).send({
         error: 'An error occurred in the API Gateway',
-        message: err
+        message: err,
       });
     } else {
       logger.error('An unknown error occurred in the API Gateway', {
