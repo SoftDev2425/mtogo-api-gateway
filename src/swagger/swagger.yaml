@@ -1427,72 +1427,72 @@ paths:
 
   /api/search/zipcode/{zipCode}:
     get:
-        tags:
-          - Search
-        summary: Get restaurants by zip code
-        description: Retrieves a list of restaurants located within a specific zip code. Optionally, filter by one or more categories.
-        parameters:
-          - name: zipCode
-            in: path
-            required: true
-            description: The zip code for which to search for restaurants.
-            schema:
-              type: string
-              example: '4000'
-          - name: category
-            in: query
-            required: false
-            description: A comma-separated list of categories to filter the restaurants (e.g., "Kebab,Pizza,Burger").
-            schema:
-              type: string
-              example: 'Kebab,Pizza,Burger'
-        responses:
-          '200':
-            description: List of restaurants retrieved successfully.
-            content:
-              application/json:
-                schema:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        example: cm4a3xyjb000813rxpakc76yk
-                      name:
-                        type: string
-                        example: 'Restaurant Name'
-                      address:
-                        type: object
-                        properties:
-                          street:
-                            type: string
-                            example: '123 Main Street'
-                          city:
-                            type: string
-                            example: 'City Name'
-                          zip:
-                            type: string
-                            example: '4000'
-                      phone:
-                        type: string
-                        example: '123-456-7890'
-                      cuisineType:
-                        type: string
-                        example: 'Italian'
-                      createdAt:
-                        type: string
-                        format: date-time
-                        example: '2024-12-04T16:45:30.123Z'
-          '404':
-            description: No restaurants found for the given zip code or category.
-            content:
-              application/json:
-                schema:
+      tags:
+        - Search
+      summary: Get restaurants by zip code
+      description: Retrieves a list of restaurants located within a specific zip code. Optionally, filter by one or more categories.
+      parameters:
+        - name: zipCode
+          in: path
+          required: true
+          description: The zip code for which to search for restaurants.
+          schema:
+            type: string
+            example: '4000'
+        - name: category
+          in: query
+          required: false
+          description: A comma-separated list of categories to filter the restaurants (e.g., "Kebab,Pizza,Burger").
+          schema:
+            type: string
+            example: 'Kebab,Pizza,Burger'
+      responses:
+        '200':
+          description: List of restaurants retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
                   type: object
                   properties:
-                    message:
+                    id:
                       type: string
-                      example: 'No restaurants found for the given zip code or category.'
-          '500':
-            description: Internal server error.
+                      example: cm4a3xyjb000813rxpakc76yk
+                    name:
+                      type: string
+                      example: 'Restaurant Name'
+                    address:
+                      type: object
+                      properties:
+                        street:
+                          type: string
+                          example: '123 Main Street'
+                        city:
+                          type: string
+                          example: 'City Name'
+                        zip:
+                          type: string
+                          example: '4000'
+                    phone:
+                      type: string
+                      example: '123-456-7890'
+                    cuisineType:
+                      type: string
+                      example: 'Italian'
+                    createdAt:
+                      type: string
+                      format: date-time
+                      example: '2024-12-04T16:45:30.123Z'
+        '404':
+          description: No restaurants found for the given zip code or category.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 'No restaurants found for the given zip code or category.'
+        '500':
+          description: Internal server error.
