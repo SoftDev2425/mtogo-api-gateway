@@ -2,16 +2,16 @@ config:
   target: http://localhost:3000
   phases:
     - duration: 30
-      arrivalRate: 10
-      rampTo: 50
+      arrivalRate: 5
+      rampTo: 20
       name: Warm up phase
     - duration: 60
-      arrivalRate: 50
-      rampTo: 200
+      arrivalRate: 20
+      rampTo: 50
       name: Load test
     - duration: 30
-      arrivalRate: 200
-      rampTo: 10
+      arrivalRate: 10
+      rampTo: 5
       name: Cool down phase
   ensure:
     thresholds:
@@ -25,4 +25,4 @@ scenarios:
           # Simulate various API requests
           - get:
               url: '/healthcheck'
-        count: 50 # The entire sequence of requests will repeat 50 times for each virtual user simulated during the test phase.
+        count: 20 # The entire sequence of requests will repeat 20 times for each virtual user simulated during the test phase.

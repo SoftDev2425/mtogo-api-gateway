@@ -1,7 +1,9 @@
 {
   "yaml.schemas": {
     "https://www.artillery.io/schema.json": [
-      "file:///Users/owaisdashti/Desktop/service_tests/mtogo-api-gateway/src/tests/load/sample-load-test.yml"
+      "file:///Users/owaisdashti/Desktop/service_tests/mtogo-api-gateway/src/tests/load/sample-load-test.yml",
+      "file:///Users/owaisdashti/Desktop/service_tests/mtogo-api-gateway/src/tests/load/healthcheck-test.yml",
+      "file:///Users/owaisdashti/Desktop/service_tests/mtogo-api-gateway/src/tests/load/search-load-test.yml"
     ]
   }
 }

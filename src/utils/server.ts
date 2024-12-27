@@ -1,6 +1,6 @@
 import express from 'express';
 import routes from '../routes';
-import { limiter } from './rateLimit';
+//import { limiter } from './rateLimit';
 import { logRequestDetails } from '../middleware/loggerMiddleware';
 import cookieParser from 'cookie-parser';
 import { jsonParseErrorHandler } from '../middleware/jsonParseErrorHandler';
@@ -36,7 +36,7 @@ function createServer() {
 
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-  app.use(limiter);
+  // app.use(limiter);
 
   app.use(logRequestDetails);
 

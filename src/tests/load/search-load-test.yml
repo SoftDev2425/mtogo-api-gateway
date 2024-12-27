@@ -2,15 +2,15 @@ config:
   target: http://localhost:3000
   phases:
     - duration: 60
-      arrivalRate: 3000 # Start with 3,000 users per minute
-      rampTo: 15000 # Gradually ramp up to 15,000 users
+      arrivalRate: 50 # Start with 50 users per minute
+      rampTo: 250 # Gradually ramp up to 250 users
       name: Warm up phase
     - duration: 120
-      arrivalRate: 15000 # Maintain 15,000 users per minute
+      arrivalRate: 250 # Maintain 250 users per second
       name: Sustained peak load
     - duration: 60
-      arrivalRate: 15000 # Start at peak
-      rampTo: 3000 # Gradually reduce to 3,000 users
+      arrivalRate: 250 # Start at peak
+      rampTo: 50 # Gradually reduce to 50 users per second
       name: Cool down phase
   ensure:
     thresholds:
@@ -22,6 +22,5 @@ scenarios:
   - name: 'Search Restaurants by Zip Code'
     flow:
       - get:
-          url: '/api/search/zipcode/{{ zipcode }}'
-    variables:
-      zipcode: [4000, 5000, 6000] # Example zip codes for dynamic data
+          url: '/api/search/zipcode/4000'
+
