@@ -23,4 +23,3 @@ scenarios:
     flow:
       - get:
           url: '/api/search/zipcode/4000'
-

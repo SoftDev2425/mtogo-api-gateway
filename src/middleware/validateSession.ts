@@ -13,7 +13,7 @@ export const validateSession = async (
     if (!sessionId) {
       req.email = undefined;
       req.userId = undefined;
-      req.role = undefined; 
+      req.role = undefined;
       return next();
     }
 
